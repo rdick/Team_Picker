@@ -1,0 +1,60 @@
+<%- include("./partials/header.ejs")  %> 
+
+<div class="container">
+  <form action="/team/<%= team.id %>/edit" method="GET" style="margin-top: 3vh;"> 
+    <button class="btn btn-warning btn-block" type="submit"> <strong>Edit Cohort</strong> </button>
+  </form>
+  <form action="/team/<%= team.id %>" method="POST" style="margin-top: 3vh;">
+    <input type="hidden" name="_method" value="DELETE">  
+    <button class="btn btn-danger btn-block" type="submit"><strong>Delete Cohort</strong></button>
+  </form>
+</div>
+
+<div class="card container" style="margin-top: 3vh;">
+  <div class="card-body"></div>
+    <div class="card-title">
+        <h1><%= team.name %></h1>
+        <br>
+        <p><%= team.members %></p>
+    </div>
+    <div class="card-text ">
+        <hr> 
+        <form action="/team/<%=team.id%>/method" method="GET" class="d-flex-column">
+            <p>Method</p>
+            <input type="radio" name="x"  value = "1" id = "TeamCount" >   Team Count</input>
+            <br>
+            <input type="radio" name="x" value = "2" id = "NumberPerTeam">    Number Per Team </input>
+            <br><br>
+            <p>Quantity</p>
+            <input type="number" name="number" id="number"/>
+            <br>
+            <input type="submit" value="Assign Teams" class="di"/>
+        </form>   
+        <br>
+      </div>
+      <div>
+          <% if (query != undefined && Object.keys(obj).length != 0) {%> 
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Team Size</th>
+                      <th scope="col">Members Of Team</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% let i = 1 %>  
+                    <% for(let value in obj ) {%> 
+                    <tr>
+                      <th scope="row"><%= i++  %></th>
+                      <td><%= obj[value].length%></td>
+                      <td><%= obj[value] %></td>
+                    </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+    <% } %> 
+    </div>
+  </div>
+</div>
+<%- include("./partials/footer.ejs")  %> 
